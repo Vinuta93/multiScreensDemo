@@ -1,11 +1,11 @@
 package com.example.multiscreensdemo.adapter
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.multiscreensdemo.R
 import com.example.multiscreensdemo.model.HomeItems
@@ -37,6 +37,9 @@ class HomeItemAdapter(var items : ArrayList<HomeItems>)  : RecyclerView.Adapter<
 
             name.text = homeItems.name
             image.setImageResource(homeItems.resourceID)
+            itemView.setOnClickListener {
+                Toast.makeText(itemView.context, homeItems.name, Toast.LENGTH_SHORT).show()
+            }
         }
 
     }
