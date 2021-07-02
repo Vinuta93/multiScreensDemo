@@ -8,9 +8,10 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.multiscreensdemo.R
+import com.example.multiscreensdemo.`interface`.OnItemClick
 import com.example.multiscreensdemo.model.HomeItems
 
-class HomeItemAdapter(var items : ArrayList<HomeItems>)  : RecyclerView.Adapter<HomeItemAdapter.ViewHolder>() {
+class HomeItemAdapter(var items : ArrayList<HomeItems>, var i : OnItemClick)  : RecyclerView.Adapter<HomeItemAdapter.ViewHolder>() {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeItemAdapter.ViewHolder {
@@ -20,7 +21,7 @@ class HomeItemAdapter(var items : ArrayList<HomeItems>)  : RecyclerView.Adapter<
 
 
     override fun onBindViewHolder(holder: HomeItemAdapter.ViewHolder, position: Int) {
-        holder.init(items[position])
+        holder.init(items[position], i)
     }
 
     override fun getItemCount(): Int {
@@ -33,12 +34,15 @@ class HomeItemAdapter(var items : ArrayList<HomeItems>)  : RecyclerView.Adapter<
         private val name : TextView = itemView.findViewById(R.id.name)
         private val image : ImageView = itemView.findViewById(R.id.img)
 
-        fun init(homeItems: HomeItems) {
+        fun init(homeItems: HomeItems, i: OnItemClick) {
 
             name.text = homeItems.name
             image.setImageResource(homeItems.resourceID)
             itemView.setOnClickListener {
                 Toast.makeText(itemView.context, homeItems.name, Toast.LENGTH_SHORT).show()
+                i.onCardItemClick( homeItems.name)
+
+
             }
         }
 
